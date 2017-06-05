@@ -45,4 +45,3 @@ TODO:
 Random Color Quickie:
 -------
 * Multiple Calendars saved with same color. (Import into database `UPDATE caldav_calendars SET color = substring(MD5(RAND()), -6);` to assign radmon colors after initial sync of calendars)
->>>>>>> 7d9e4f9d77331480c3876e6300d3c7354f301aab
