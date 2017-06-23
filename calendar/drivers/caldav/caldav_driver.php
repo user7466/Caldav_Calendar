@@ -206,10 +206,10 @@ class caldav_driver extends calendar_driver
             $prop['color'],
             $prop['showalarms']?1:0,
             $prop['caldav_url'],
-            isset($prop["caldav_tag"]) ? $prop["caldav_tag"] : null,
-            isset($prop["caldav_user"]) ? $prop["caldav_user"] : null,
-            isset($prop["caldav_pass"]) ? $this->_encrypt_pass($prop["caldav_pass"]) : null,
-            isset($prop["caldav_oauth_provider"]) ? $prop["caldav_oauth_provider"] : null
+            isset($prop["caldav_tag"]) && $prop["caldav_tag"] ? $prop["caldav_tag"] : null,
+            isset($prop["caldav_user"]) && $prop["caldav_user"] ? $prop["caldav_user"] : null,
+            isset($prop["caldav_pass"]) && $prop["caldav_pass"] ? $this->_encrypt_pass($prop["caldav_pass"]) : null,
+            isset($prop["caldav_oauth_provider"]) && $prop["caldav_oauth_provider"] ? $prop["caldav_oauth_provider"] : null
         );
         if ($result)
             return $this->rc->db->insert_id($this->db_calendars);
@@ -230,9 +230,9 @@ class caldav_driver extends calendar_driver
             $cal['color'],
             $cal['showalarms']?1:0,
             $cal['caldav_url'],
-            isset($cal["caldav_tag"]) ? $cal["caldav_tag"] : null,
-            isset($cal["caldav_user"]) ? $cal["caldav_user"] : null,
-            isset($cal["caldav_oauth_provider"]) ? $cal["caldav_oauth_provider"] : null,
+            isset($cal["caldav_tag"]) && $cal["caldav_tag"] ? $cal["caldav_tag"] : null,
+            isset($cal["caldav_user"]) && $cal["caldav_user"] ? $cal["caldav_user"] : null,
+            isset($cal["caldav_oauth_provider"]) && $cal["caldav_oauth_provider"] ? $cal["caldav_oauth_provider"] : null,
             $cal['id'],
             $this->rc->user->ID
         );
@@ -1691,6 +1691,7 @@ class caldav_driver extends calendar_driver
         $current_user_principal = array('{DAV:}current-user-principal');
         $calendar_home_set = array('{urn:ietf:params:xml:ns:caldav}calendar-home-set');
         $cal_attribs = array('{DAV:}resourcetype', '{DAV:}displayname');
+        $oauth_client = (isset($props["caldav_oauth_provider"]) && $props["caldav_oauth_provider"]) ? new oauth_client($this->rc, $props["caldav_oauth_provider"]) : null;
         require_once ($this->cal->home.'/lib/caldav-client.php');
         $caldav = new caldav_client($props["caldav_url"], $props["caldav_user"], $props["caldav_pass"]);
         $tokens = parse_url($props["caldav_url"]);

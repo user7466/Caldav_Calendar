@@ -26,11 +26,11 @@
 */
 
 // backend type (database, kolab, caldav, ical)
-$config['calendar_driver'] = array("caldav");
-$config['calendar_driver_default'] = "caldav";
+$config['calendar_driver'] = array("kolab");
+$config['calendar_driver_default'] = "kolab";
 
 // default calendar view (agendaDay, agendaWeek, month)
-$config['calendar_default_view'] = "month";
+$config['calendar_default_view'] = "agendaWeek";
 
 // show a birthdays calendar from the user's address book(s)
 $config['calendar_contact_birthdays'] = false;
@@ -155,7 +155,7 @@ $config['calendar_itip_smtp_pass'] = '123456';
 // %u - Current webmail user name
 // %n - Calendar name
 // %i - Calendar UUID
-$config['calendar_caldav_url'] = 'https://www.domain.ltd/cloud/remote.php/dav/calendars/%u/%n';
+// $config['calendar_caldav_url'] = 'http://%h/iRony/calendars/%u/%i';
 
 // Crypt key to encrypt passwords for added iCAL/CalDAV calendars
 $config['calendar_crypt_key'] = "put some random string here";
@@ -192,13 +192,21 @@ $config['calendar_oauth_providers'] = array(
 
 // Pre-installed calendars, added at first access to calendar section
 // Caldav driver is supported only
- $config['calendar_preinstalled_calendars'] = array(
-    'Nextcloud' => array(
-                    'driver'      => 'caldav',
-		    'name'        => 'Personal',
-                    'caldav_user' => '%u',
-                    'caldav_pass' => '%p',
-                    'caldav_url'  => 'https://www.domain.ltd/cloud/remote.php/dav/calendars/%u/',
-                    'color'       => '#0000FF',
-                    'showAlarms'  => 1));
+// $config['calendar_preinstalled_calendars'] = array(
+//    'Caldav' => array(
+//                    'driver'      => 'caldav',
+//                    'caldav_user' => '%u',
+//                    'caldav_pass' => '%p',
+//                    'caldav_url'  => 'http://example.caldav.org/%u/calendar/',
+//                    'color'       => 'cccc00',
+//                    'showAlarms'  => 1),
+//    'Other' => array(
+//                    'driver'          => 'other',
+//                    'other_user'      => 'user@example.other.org',
+//                    'other_pass'      => 'password',
+//                    'other_url'       => 'http://example.other.org/user@example.other.org/other',
+//                    'color'           => 'cc0000',
+//                    'other_property1' => 'value1',
+//          		  'other_property2' => 'value2',
+//                    'showAlarms'      => 1));
 ?>
