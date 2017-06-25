@@ -26,6 +26,7 @@ Your login and password must be the same for Nextcloud and Roundcube to work pro
 
 Known Issues:
 -------
+* Incompatible libcalendaring with Tasklist (WIP to make compatible)
 * Will not create new calendar.
 * Itip does not send reply to event organizer using RC1.3. Works in RC1.2.4.
 * ~~Recurring events marked as "All Day Events" will be a day early the following years.~~ Fixed!!!!
