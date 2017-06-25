@@ -10,6 +10,8 @@ This is also compatible with RCMCARDDAV 2.0.4 as I use it to sync my contacts wi
 
 This was tested using Roundcube 1.3 and PHP 7.0.17.
 
+I recently discovered the libcalendaring didn't agree with tasklist, so I have made multiple changes in libcalendaring folder in order to be capatable with everything, so I may have introduced some bugs. We shall sort them out as they are found.
+
 Installation is pretty straight forward.
 
 Copy calendar and libcalendaring folders to Roundcube Plugin folder, copy config.inc.php.dist to config.inc.php and change domain.ltd to your URL. 'These URL's are already configured for the default calendar url for Nextcloud.'

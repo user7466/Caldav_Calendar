@@ -9,7 +9,4 @@
 $labels['until'] = 'até';
 $labels['frequency'] = 'Repetir';
 $labels['recurrencend'] = 'até';
-$labels['statusorganizer'] = 'Organizador';
-$labels['statustentative'] = 'Tentativa';
-$labels['statusunknown'] = 'Desconhecido';
 $labels['savingdata'] = 'Salvando dados...';
