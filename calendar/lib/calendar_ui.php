@@ -52,6 +52,7 @@ class calendar_ui
       'classsel' => 'button-calendar button-selected',
       'innerclass' => 'button-inner',
       'label'   => 'calendar.calendar',
+      'type'       => 'link'
       ), 'taskbar');
     
     // load basic client script
