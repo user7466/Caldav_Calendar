@@ -295,8 +295,16 @@ class calendar_ui
     }
 
     $classes = array('calendar', 'cal-'  . asciiwords($id, true));
+    if (defined(RCUBE_CHARSET)) {
+        $charset = RCUBE_CHARSET;
+    } elseif (defined(RCMAIL_CHARSET)) {
+        $charset = RCMAIL_CHARSET;
+    } else {
+        $charset = $this->rc->config->get('default_charset');
+    }
+
     $title = $prop['title'] ?: ($prop['name'] != $prop['listname'] || strlen($prop['name']) > 25 ?
-      html_entity_decode($prop['name'], ENT_COMPAT, RCMAIL_CHARSET) : '');
+      html_entity_decode($prop['name'], ENT_COMPAT, $charset) : '');
 
     if ($prop['virtual'])
       $classes[] = 'virtual';

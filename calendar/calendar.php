@@ -3407,7 +3407,13 @@ if(count($cals) > 0){
     $uid     = rcube_utils::get_input_value('_uid', rcube_utils::INPUT_POST);
     $mbox    = rcube_utils::get_input_value('_mbox', rcube_utils::INPUT_POST);
     $mime_id = rcube_utils::get_input_value('_part', rcube_utils::INPUT_POST);
-    $charset = RCUBE_CHARSET;
+    if (defined(RCUBE_CHARSET)) {
+        $charset = RCUBE_CHARSET;
+    } elseif (defined(RCMAIL_CHARSET)) {
+        $charset = RCMAIL_CHARSET;
+    } else {
+        $charset = $this->rc->config->get('default_charset');
+    }
 
     // establish imap connection
     $imap = $this->rc->get_storage();
