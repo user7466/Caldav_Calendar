@@ -1221,10 +1221,17 @@ class libcalendaring extends rcube_plugin
         $url = str_replace('&_preload=1', '', $_SERVER['REQUEST_URI']);
         $message = $this->rc->gettext('loadingdata');
 
-        header('Content-Type: text/html; charset=' . RCUBE_CHARSET);
+        if (defined(RCUBE_CHARSET)) {
+            $charset = RCUBE_CHARSET;
+        } elseif (defined(RCMAIL_CHARSET)) {
+            $charset = RCMAIL_CHARSET;
+        } else {
+            $charset = $this->rc->config->get('default_charset');
+        }
+        header('Content-Type: text/html; charset=' . $charset);
         print "<html>\n<head>\n"
             . '<meta http-equiv="refresh" content="0; url='.Q($url).'">' . "\n"
-            . '<meta http-equiv="content-type" content="text/html; charset='.RCUBE_CHARSET.'">' . "\n"
+            . '<meta http-equiv="content-type" content="text/html; charset=' . $charset . '">' . "\n"
             . "</head>\n<body>\n$message\n</body>\n</html>";
         exit;
     }
@@ -1318,7 +1325,14 @@ class libcalendaring extends rcube_plugin
 
             foreach ($this->ical_parts as $mime_id) {
                 $part    = $this->ical_message->mime_parts[$mime_id];
-                $charset = $part->ctype_parameters['charset'] ?: RCMAIL_CHARSET;
+                if (defined(RCUBE_CHARSET)) {
+                    $def_charset = RCUBE_CHARSET;
+                } elseif (defined(RCMAIL_CHARSET)) {
+                    $def_charset = RCMAIL_CHARSET;
+                } else {
+                    $def_charset = $this->rc->config->get('default_charset');
+                }
+                $charset = $part->ctype_parameters['charset'] ?: $def_charset;
                 $this->mail_ical_parser->import($this->ical_message->get_part_body($mime_id, true), $charset);
 
                 // check if the parsed object is an instance of a recurring event/task
@@ -1357,7 +1371,13 @@ class libcalendaring extends rcube_plugin
      */
     public function mail_get_itip_object($mbox, $uid, $mime_id, $type = null)
     {
-        $charset = RCMAIL_CHARSET;
+        if (defined(RCUBE_CHARSET)) {
+            $charset = RCUBE_CHARSET;
+        } elseif (defined(RCMAIL_CHARSET)) {
+            $charset = RCMAIL_CHARSET;
+        } else {
+            $charset = $this->rc->config->get('default_charset');
+        }
 
         // establish imap connection
         $imap = $this->rc->get_storage();
