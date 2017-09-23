@@ -1692,7 +1692,9 @@ class caldav_driver extends calendar_driver
         $calendar_home_set = array('{urn:ietf:params:xml:ns:caldav}calendar-home-set');
         $cal_attribs = array('{DAV:}resourcetype', '{DAV:}displayname');
         $oauth_client = (isset($props["caldav_oauth_provider"]) && $props["caldav_oauth_provider"]) ? new oauth_client($this->rc, $props["caldav_oauth_provider"]) : null;
-        require_once ($this->cal->home.'/lib/caldav-client.php');
+        if (!class_exists('caldav_client')) {
+        	require_once ($this->cal->home.'/lib/caldav-client.php');
+        }
         $caldav = new caldav_client($props["caldav_url"], $props["caldav_user"], $props["caldav_pass"]);
         $tokens = parse_url($props["caldav_url"]);
         $base_uri = $tokens['scheme']."://".$tokens['host'].($tokens['port'] ? ":".$tokens['port'] : null);

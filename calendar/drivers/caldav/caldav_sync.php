@@ -21,7 +21,9 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once (dirname(__FILE__).'/../../lib/caldav-client.php');
+if (!class_exists('caldav_client')) {
+	require_once (dirname(__FILE__).'/../../lib/caldav-client.php');
+}
 
 class caldav_sync
 {
