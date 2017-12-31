@@ -14,7 +14,7 @@ I recently discovered the libcalendaring didn't agree with tasklist, so I have m
 
 Installation is pretty straight forward.
 
-Copy calendar and libcalendaring folders to Roundcube Plugin folder, copy config.inc.php.dist to config.inc.php and change domain.ltd to your URL. 'These URL's are already configured for the default calendar url for Nextcloud.'
+Copy calendar and libcalendaring folders to Roundcube Plugin folder, copy config.inc.php.dist to config.inc.php, located in root of calendar directory, and change domain.ltd to your URL. 'These URL's are already configured for the default calendar url for Nextcloud.'
 
 Import sql schemas located in /driver/ folders to your database.
 
