@@ -22,7 +22,6 @@
  */
 
 require_once(dirname(__FILE__) . '/ical_sync.php');
-require_once (dirname(__FILE__).'/../../lib/encryption.php');
 
 /**
  * TODO
@@ -1920,13 +1919,11 @@ class ical_driver extends calendar_driver
 
     private function _decrypt_pass($pass) {
         $p = base64_decode($pass);
-        $e = new Encryption(MCRYPT_BlOWFISH, MCRYPT_MODE_CBC);
-        return $e->decrypt($p, $this->crypt_key);
+	return $this->rc->decrypt($p);
     }
 
     private function _encrypt_pass($pass) {
-        $e = new Encryption(MCRYPT_BlOWFISH, MCRYPT_MODE_CBC);
-        $p = $e->encrypt($pass, $this->crypt_key);
+	$p = $this->rc->encrypt($pass);
         return base64_encode($p);
     }
 }
