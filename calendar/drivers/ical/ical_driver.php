@@ -60,9 +60,6 @@ class ical_driver extends calendar_driver
     // Min. time period to wait until sync check.
     private $sync_period = 10; // TODO: 600; // seconds
 
-    // Crypt key for CalDAV auth
-    private $crypt_key;
-
     // Indicates debug mode for iCAL
     static private $debug = null;
 
@@ -98,7 +95,6 @@ class ical_driver extends calendar_driver
         $this->db_events = $this->rc->config->get('db_table_events', $db->table_name($this->db_events));
         $this->db_calendars = $this->rc->config->get('db_table_calendars', $db->table_name($this->db_calendars));
         $this->db_attachments = $this->rc->config->get('db_table_attachments', $db->table_name($this->db_attachments));
-        $this->crypt_key = $this->rc->config->get("calendar_crypt_key", "%E`c{2;<J2F^4_&._BxfQ<5Pf3qv!m{e");
 
         // Set debug state
         if (self::$debug === null)
