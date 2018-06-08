@@ -676,6 +676,16 @@ class libvcalendar implements Iterator
             unset($event['end']);
         }
 
+        // some events have a start date but not end date. If start had no time component then this would have been flagged as allday event already
+        // however there may be a start with datetime with no end.
+        // according to RFC:
+        // For cases where a "VEVENT" calendar component specifies a "DTSTART" property with a DATE-TIME value type but no "DTEND" property,
+        // the event ends on the same calendar date and time of day specified by the "DTSTART" property. 
+        //
+        if (!$event['end'] && $event['start'] ) {
+            $event['end'] = clone $event['start'];
+        }
+
         // minimal validation
         if (empty($event['uid']) || ($event['_type'] == 'event' && empty($event['start']) != empty($event['end']))) {
             throw new VObject\ParseException('Object validation failed: missing mandatory object properties');
